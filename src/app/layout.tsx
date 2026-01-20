@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito, Lexend_Deca } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { ThemeProvider } from "@/lib/providers/theme-provider";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const nunito = Nunito({
+	variable: "--font-nunito",
 	subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
+const lexendDeca = Lexend_Deca({
+	variable: "--font-lexend-deca",
 	subsets: ["latin"],
 });
 
@@ -23,11 +25,23 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
 			</head>
-			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+			<body className={`${nunito.variable} ${lexendDeca.variable} antialiased`}>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<div className="max-w-5xl mx-auto">
+						<Navbar />
+						{children}
+					</div>
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }
