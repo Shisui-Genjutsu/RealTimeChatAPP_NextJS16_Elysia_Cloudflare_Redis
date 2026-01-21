@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nunito, Lexend_Deca } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import { ThemeProvider } from "@/lib/providers/theme-provider";
+import { Providers } from "@/lib/providers/Providers";
 
 const nunito = Nunito({
 	variable: "--font-nunito",
@@ -30,17 +30,12 @@ export default function RootLayout({
 				<link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
 			</head>
 			<body className={`${nunito.variable} ${lexendDeca.variable} antialiased`}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
+				<Providers>
 					<div className="max-w-5xl mx-auto">
 						<Navbar />
 						{children}
 					</div>
-				</ThemeProvider>
+				</Providers>
 			</body>
 		</html>
 	);
